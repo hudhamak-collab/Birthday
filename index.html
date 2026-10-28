@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffffff;
+        }
+        .search-container {
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+        }
+        .google-logo {
+            font-size: 6rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .google-logo span:nth-child(1) { color: #4285F4; }
+        .google-logo span:nth-child(2) { color: #EA4335; }
+        .google-logo span:nth-child(3) { color: #FBBC05; }
+        .google-logo span:nth-child(4) { color: #4285F4; }
+        .google-logo span:nth-child(5) { color: #34A853; }
+        .google-logo span:nth-child(6) { color: #EA4335; }
+        
+        .prompt-text {
+            font-size: 0.95rem;
+            color: #4d5156;
+            margin-bottom: 20px;
+        }
+        .search-box {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: 1px solid #dfe1e5;
+            border-radius: 24px;
+            outline: none;
+            box-shadow: none;
+            transition: box-shadow 0.2s;
+            box-sizing: border-box;
+        }
+        .search-box:focus {
+            box-shadow: 0 1px 6px rgba(32,33,36,0.28);
+            border-color: rgba(223,225,229,0);
+        }
+        .btn-container {
+            margin-top: 20px;
+        }
+        .search-btn {
+            background-color: #f8f9fa;
+            border: 1px solid #f8f9fa;
+            color: #3c4043;
+            padding: 10px 16px;
+            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            outline: none;
+        }
+        .search-btn:hover {
+            border: dadce0;
+            color: #202124;
+        }
+        .error-message {
+            color: #d93025;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            min-height: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="search-container">
+        <div class="google-logo">
+            <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
+        </div>
+        
+        <div class="prompt-text">Type your absolute favorite thing in the world to unlock your day.</div>
+        
+        <input type="text" id="searchInput" class="search-box" autocomplete="off" placeholder="Search Google or type a URL">
+        
+        <div class="error-message" id="errorBox"></div>
+        
+        <div class="btn-container">
+            <button class="search-btn" onclick="checkSearch()">Google Search</button>
+        </div>
+    </div>
+
+    <script>
+        function checkSearch() {
+            var query = document.getElementById("searchInput").value.trim().toLowerCase();
+            var errorBox = document.getElementById("errorBox");
+            
+            // Password verification list - Type anything from here to unlock (lowercase letters)
+            var correctKeywords = ["love", "birthday", "cake"];
+            
+            // Temporary Testing Link setup
+            var targetUrl = "https://example.com"; 
+
+            if (query === "") {
+                errorBox.innerHTML = "Please type something to search!";
+            } else if (correctKeywords.includes(query)) {
+                errorBox.innerHTML = "Access Granted! Loading surprise... 🎉";
+                errorBox.style.color = "#34A853";
+                setTimeout(function() {
+                    window.location.href = targetUrl;
+                }, 1200);
+            } else {
+                var mistakes = [
+                    "Nice try, but definitely wrong. Try again! ❌",
+                    "Wow, prioritising that over me? Guess again. 🙄",
+                    "Wrong keyword! Hint: Try typing 'birthday' or 'love' to test. 🤔"
+                ];
+                var randomMistake = mistakes[Math.floor(Math.random() * mistakes.length)];
+                errorBox.innerHTML = randomMistake;
+                errorBox.style.color = "#d93025";
+            }
+        }
+
+        document.getElementById("searchInput").addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                checkSearch();
+            }
+        });
+    </script>
+</body>
+</html>
